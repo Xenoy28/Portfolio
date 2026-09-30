@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathis Nguyen | Développeur Junior</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #2d3e50;
+      background-color: #f9fbfd;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header / Navigation */
+    header {
+      background: white;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e2b3a;
+    }
+
+    .logo span {
+      color: #3a7bd5;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3a7bd5;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #3a7bd5;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero section */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      color: #1e2b3a;
+    }
+
+    .hero-content h1 span {
+      color: #3a7bd5;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #eef4ff;
+      color: #3a7bd5;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #5a6a7a;
+      margin: 1.5rem 0 2rem;
+      max-width: 600px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #3a7bd5;
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(58, 123, 213, 0.3);
+    }
+
+    .btn:hover {
+      background: #2c5fb3;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(58, 123, 213, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #3a7bd5;
+      color: #3a7bd5;
+      margin-left: 1rem;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #3a7bd5;
+      color: white;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3a7bd5, #8ec5fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8rem;
+      box-shadow: 0 25px 40px rgba(58, 123, 213, 0.3);
+      border: 8px solid white;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Section commune */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #1e2b3a;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: #3a7bd5;
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* À propos */
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 30px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-content p {
+      color: #5a6a7a;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .about-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .about-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #2d3e50;
+      font-weight: 500;
+    }
+
+    .about-info-item i {
+      color: #3a7bd5;
+      font-size: 1.2rem;
+    }
+
+    /* Compétences */
+    .skills-category {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+
+    .skills-category h3 {
+      font-size: 1.3rem;
+      color: #1e2b3a;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .skills-category h3 i {
+      color: #3a7bd5;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 1.5rem 1rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(58, 123, 213, 0.15);
+    }
+
+    .skill-card i {
+      font-size: 2.2rem;
+      color: #3a7bd5;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-card p {
+      font-size: 0.8rem;
+      color: #5a6a7a;
+    }
+
+    /* Expériences */
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #3a7bd5, #8ec5fc);
+      border-radius: 3px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      background: white;
+      padding: 1.8rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(8px);
+      box-shadow: 0 15px 35px rgba(58, 123, 213, 0.12);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.6rem;
+      top: 2rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #3a7bd5;
+      border: 4px solid white;
+      box-shadow: 0 0 0 3px #3a7bd5;
+    }
+
+    .timeline-date {
+      display: inline-block;
+      background: #eef4ff;
+      color: #3a7bd5;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.3rem;
+      color: #1e2b3a;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-company {
+      color: #3a7bd5;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .timeline-item ul {
+      list-style: disc;
+      padding-left: 1.2rem;
+      color: #5a6a7a;
+    }
+
+    .timeline-item ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Formation */
+    .education-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 25px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      border-left: 5px solid #3a7bd5;
+    }
+
+    .education-card i {
+      font-size: 3rem;
+      color: #3a7bd5;
+      margin-bottom: 1rem;
+    }
+
+    .education-card h3 {
+      font-size: 1.5rem;
+      color: #1e2b3a;
+      margin-bottom: 0.5rem;
+    }
+
+    .education-card p {
+      color: #5a6a7a;
+      font-size: 1.05rem;
+    }
+
+    .mention {
+      display: inline-block;
+      background: #fff8e1;
+      color: #f39c12;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    /* Contact */
+    .contact-content {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .contact-content p {
+      color: #5a6a7a;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #2d3e50;
+      font-weight: 500;
+    }
+
+    .contact-item i {
+      color: #3a7bd5;
+      font-size: 1.3rem;
+      width: 40px;
+      height: 40px;
+      background: #eef4ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem 1.5rem;
+      border: 1px solid #dbe4f0;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-form textarea {
+      border-radius: 20px;
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #3a7bd5;
+      box-shadow: 0 0 0 4px rgba(58, 123, 213, 0.1);
+    }
+
+    .contact-form button {
+      align-self: center;
+      padding: 1rem 3rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      color: #5a6a7a;
+      border-top: 1px solid #e6edf6;
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-outline {
+        margin-left: 0.5rem;
+      }
+
+      .avatar {
+        width: 250px;
+        height: 250px;
+        font-size: 6rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        color: #1e2b3a;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        padding: 2rem 0;
+        gap: 1.8rem;
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.05);
+        transition: left 0.3s;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .contact-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .timeline {
+        padding-left: 1.5rem;
+      }
+
+      .timeline-item {
+        padding: 1.5rem;
+      }
+
+      .timeline-item::before {
+        left: -2.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .btn, .btn-outline {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+        text-align: center;
+      }
+
+      .btn-outline {
+        margin-left: 0;
+      }
+
+      .avatar {
+        width: 200px;
+        height: 200px;
+        font-size: 5rem;
+      }
+
+      .about-info {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">Mathis<span>Nguyen</span></div>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#experiences">Expériences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="accueil" class="hero">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-briefcase"></i> Alternance 3j entreprise / 2j CFA</span>
+      <h1>Bonjour, je suis <span>Mathis Nguyen</span></h1>
+      <p>Développeur junior passionné, motivé pour développer constamment mes compétences et évoluer professionnellement.</p>
+      <div>
+        <a href="#experiences" class="btn">Voir mon parcours</a>
+        <a href="#contact" class="btn btn-outline">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="avatar">
+        <!-- Remplace par ta photo : <img src="photo.jpg" alt="Mathis Nguyen"> -->
+        <i class="fas fa-user-tie"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="apropos" style="background: white;">
+    <h2 class="section-title">À propos</h2>
+    <div class="about-content">
+      <p>Extrêmement motivé pour développer constamment mes compétences et évoluer professionnellement.</p>
+      <p>Actuellement en formation BTS SIO SLAM, je recherche une alternance me permettant de mettre en pratique mes compétences techniques tout en continuant à apprendre.</p>
+      <div class="about-info">
+        <div class="about-info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>93350 Le Bourget</span>
+        </div>
+        <div class="about-info-item">
+          <i class="fas fa-envelope"></i>
+          <span>mathisnguyen28@gmail.com</span>
+        </div>
+        <div class="about-info-item">
+          <i class="fas fa-phone"></i>
+          <span>06 60 65 78 33</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compétences -->
+  <section id="competences">
+    <h2 class="section-title">Mes compétences</h2>
+
+    <div class="skills-category">
+      <h3><i class="fas fa-code"></i> Langages & Frameworks</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-php"></i>
+          <h4>PHP</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-java"></i>
+          <h4>Java</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-html5"></i>
+          <h4>HTML5</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-css3-alt"></i>
+          <h4>CSS3</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-js"></i>
+          <h4>JavaScript</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-python"></i>
+          <h4>Python</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-js-square"></i>
+          <h4>jQuery</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-bootstrap"></i>
+          <h4>Bootstrap</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h3><i class="fas fa-database"></i> Base de données & CMS</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fas fa-database"></i>
+          <h4>MySQL</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-wordpress"></i>
+          <h4>WordPress</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h3><i class="fas fa-server"></i> Systèmes & Réseau</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-windows"></i>
+          <h4>Windows</h4>
+          <p>NTFS, HyperV</p>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-linux"></i>
+          <h4>Debian</h4>
+          <p>Apache</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-network-wired"></i>
+          <h4>Réseau</h4>
+          <p>IP, routeur, switch</p>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cube"></i>
+          <h4>Virtualisation</h4>
+          <p>VirtualBox</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h3><i class="fas fa-tools"></i> Outils</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-git-alt"></i>
+          <h4>Git</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-file-word"></i>
+          <h4>Suite Office</h4>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-laptop-code"></i>
+          <h4>JetBrains</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expériences -->
+  <section id="experiences" style="background: white;">
+    <h2 class="section-title">Mes expériences</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <span class="timeline-date">Mai – Juin 2026</span>
+        <h3>Stage Développeur Junior</h3>
+        <p class="timeline-company"><i class="fas fa-building"></i> Mairie de Paris</p>
+        <ul>
+          <li>Développement d'un labyrinthe pour la page Error 404 en HTML/CSS et JavaScript</li>
+          <li>Utilisation de Three.js et APIs Web (gyroscope mobile)</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-date">Novembre – Décembre 2024</span>
+        <h3>Stage Technicien Support</h3>
+        <p class="timeline-company"><i class="fas fa-building"></i> Mairie de Paris</p>
+        <ul>
+          <li>Masterisation de postes</li>
+          <li>Tâches de support utilisateur</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-date">Février – Avril 2024</span>
+        <h3>Stage Robotique / Développement</h3>
+        <p class="timeline-company"><i class="fas fa-building"></i> Mainbot</p>
+        <ul>
+          <li>Réparation et maintenance de robots</li>
+          <li>Développement d'un jeu en Python pour le robot</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-date">Mai – Juin 2023</span>
+        <h3>Stage Technicien Support</h3>
+        <p class="timeline-company"><i class="fas fa-building"></i> Mairie du Bourget</p>
+        <ul>
+          <li>Masterisation de PC</li>
+          <li>Tâches de support utilisateur</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Formation -->
+  <section id="formation">
+    <h2 class="section-title">Ma formation</h2>
+    <div class="education-card">
+      <i class="fas fa-graduation-cap"></i>
+      <h3>BTS SIO SLAM</h3>
+      <p>Lycée Robert Schuman</p>
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">Solutions Logicielles et Applications Métiers</p>
+      <span class="mention"><i class="fas fa-award"></i> Bac Pro SN mention Très Bien</span>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="background: white;">
+    <h2 class="section-title">Contactez-moi</h2>
+    <div class="contact-content">
+      <p>Une opportunité d'alternance, un projet ou simplement envie d'échanger ? N'hésitez pas à me contacter.</p>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>mathisnguyen28@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>06 60 65 78 33</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Le Bourget (93)</span>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Merci pour votre message ! (démo)');">
+        <input type="text" placeholder="Votre nom" required>
+        <input type="email" placeholder="Votre email" required>
+        <textarea placeholder="Votre message" required></textarea>
+        <button type="submit" class="btn">Envoyer le message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mathis Nguyen. Tous droits réservés. Fait avec <i class="fas fa-heart" style="color:#3a7bd5;"></i></p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
